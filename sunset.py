@@ -1,4 +1,4 @@
-# sunriseCheck.py
+# sunset.py
 # https://paetalung.github.io/cv/
 
 from selenium import webdriver
