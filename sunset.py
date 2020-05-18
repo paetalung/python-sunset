@@ -1,4 +1,4 @@
-# sunset.py
+# sunriseCheck.py
 # https://paetalung.github.io/cv/
 
 from selenium import webdriver
@@ -11,7 +11,7 @@ opt = webdriver.ChromeOptions()
 opt.add_argument('headless') # hidden mode of chrome
 
 driver = webdriver.Chrome(options=opt) # create driver
-
+#driver = webdriver.Chrome() # create driver
 url = 'https://meteogram.org/sun/thailand/chumphon/'
 
 driver.get(url) # open web
@@ -21,20 +21,23 @@ page_html = driver.page_source
 driver.close()
 
 data = soup(page_html,'html.parser') # scan data
+#print(data)
 
-table = data.findAll('span',{'id':'sunset'})
+table = data.find('span',{'id':'sunset'})
+#print(table)
+
 out = str(table) # index on data
 
-out = out.replace("[<span id=\"sunset\">","")
-out = out.replace("</span>]","")
-
+out = out.replace("<span id=\"sunset\">","")
+out = out.replace("</span>","")
 #print(out)
 
 # Send line Section    
 from songline import Sendline
-token = '' # TEST TOKEN
+token = 'XXXXXXXXXXX' # TEST
 
-sunrise = "SUNSET @ " + out
+sunset = "SUNSET @ " + out
 
 messenger = Sendline(token)
-messenger.sendtext(sunrise)
+messenger.sendtext(sunset)
+
